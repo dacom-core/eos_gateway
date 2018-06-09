@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    web:
+      restart: always
+      build: .
+      ports:
+          - "127.0.0.1:8000:80"
+      volumes:
+        - ./logs/:/app/logs/
+        - ./config/local_settings.py:/app/config/local_settings.py
+        - ./static:/app/static
+      env_file: .env_file
+
+      environment:
+        - POSTGRES_HOST=db
+      command: bash -c "python manage.py migrate --settings=config.settings
+                        && python manage.py collectstatic --noinput --settings=config.settings
+                        && gunicorn gateway.wsgi:application -w 2 -b :80"
+      depends_on:
+          - db
+    db:
+        image: postgres:9.6
+        ports:
+            - "127.0.0.1:5432:5432"
+        volumes:
+           - ./db_dumps/:/db_dumps/
+           - ./pg_data:/var/lib/postgresql/data

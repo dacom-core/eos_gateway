@@ -4,3 +4,5 @@
 .idea
 *.db
 local_settings.py
+pg_data/
+db_dumps/
