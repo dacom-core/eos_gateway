@@ -1,0 +1,6 @@
+*.pyd
+*.pyc
+.idea/*
+.idea
+*.db
+local_settings.py
