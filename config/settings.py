@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.eos',
 ]
 
 MIDDLEWARE = [
@@ -119,6 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+ASSETS = ['SYS', 'FLO']
+NODE = 'http://10.101.1.69:8888'
+EOS_BASE_ACCOUNT = 'eosio.token'
 
 try:
     from config.local_settings import *
